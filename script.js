@@ -13,19 +13,30 @@ function deleteLast(){
 }
 
 function calculate(){
+
     try{
-        display.value = eval(display.value);
+
+        let expression = display.value.replace('%','/100');
+
+        let result = eval(expression);
+
+        display.value = result;
+
     }
     catch{
+
         display.value = "Error";
     }
 }
 
-document.addEventListener("keydown", function(event){
+document.addEventListener("keydown",(event)=>{
 
     const key = event.key;
 
-    if(!isNaN(key) || "+-*/.".includes(key)){
+    if(
+        !isNaN(key) ||
+        ['+','-','*','/','.','(',')'].includes(key)
+    ){
         appendValue(key);
     }
 
@@ -40,4 +51,5 @@ document.addEventListener("keydown", function(event){
     if(key === "Escape"){
         clearDisplay();
     }
+
 });
